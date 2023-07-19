@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14.x
+    commands:
+      # Install project dependencies
+      - npm install
+
+  pre_build:
+    commands:
+      # Build the React application for production
+      - npm run prod
+
+  artifacts:
+    files:
+      # Include the built files for deployment
+      - dist/**
+    name: spot-react-demo-artifacts
+
+cache:
+  paths:
+    # Cache node_modules to speed up future builds
+    - node_modules/
+
+# You may add additional configuration here for testing, deployment, etc.
