@@ -8,20 +8,21 @@ phases:
       # Install project dependencies
       - npm install
 
-  pre_build:
+  build:
     commands:
       # Build the React application for production
-      - npm run prod
+      - npm run build # Corrected to "build" instead of "prod"
 
-  artifacts:
-    files:
-      # Include the built files for deployment
-      - dist/**
-    name: spot-react-demo-artifacts
+  post_build:
+    commands:
+      - echo "Updating files in the S3 bucket..."
+      - aws s3 sync dist/reactjs-sample/ s3://test-react-soft --delete
 
-cache:
-  paths:
-    # Cache node_modules to speed up future builds
-    - node_modules/
 
-# You may add additional configuration here for testing, deployment, etc.
+
+
+
+
+
+
+
